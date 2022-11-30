@@ -13,6 +13,13 @@ def api_logout():
 def api_register_user():
    return {'msg': 'test: register uses'}
 
+@app.route('/exchange/trades/<oms_id>/account/<account_id>/order')
+def api_trades_account_order(oms_id, account_id):
+   return {
+         'msg': 'test: trades',
+         'oms': oms_id,
+         'acc': account_id
+      }
 
 # @app.route('/guest/<guest>')
 # def hello_guest(guest):
@@ -24,6 +31,7 @@ def api_register_user():
 #       return redirect(url_for('hello_admin'))
 #    else:
 #       return redirect(url_for('hello_guest',guest = name))
+
 
 if __name__ == '__main__':
    app.run(debug = True)
