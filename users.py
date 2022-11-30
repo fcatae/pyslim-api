@@ -1,5 +1,8 @@
 from flask import Flask, request, redirect
+from userdb import UserDb
+
 app = Flask(__name__)
+userdb = UserDb()
 
 @app.route('/authenticate')
 def api_auth():
@@ -37,9 +40,16 @@ def api_logout():
 def api_register_user():
     content = request.get_json()
     username = content['customerCredential']['username']
+    password = content['customerCredential']['password']
     email = content['contactInfo']['email']
 
+    userdb.add(username, { 'password': password, 'email': email })
+    
     return { 'msg': f'User registered: {username} ({email})' }
+
+@app.route('/users')
+def api_user_list():
+    return userdb.list()
 
 if __name__ == '__main__':
    app.run(debug = True)
