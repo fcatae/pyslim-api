@@ -77,5 +77,11 @@ def api_user_list():
 def api_user_detail(username):
     return userdb.get(username)
 
+@app.route('/ping')
+def ping():
+   return {'ping': 'users'}
+
+print('--- USERS started ---')
+
 if __name__ == '__main__':
    app.run(host='0.0.0.0',port=5000, debug=True)

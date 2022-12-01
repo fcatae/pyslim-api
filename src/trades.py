@@ -12,5 +12,11 @@ def api_trades_account_order(oms_id, account_id):
          'acc': account_id
       }
 
+@app.route('/ping')
+def ping():
+   return {'ping': 'trades'}
+
+print('--- TRADES started ---')
+
 if __name__ == '__main__':
    app.run(host='0.0.0.0',port=5000, debug=True)
