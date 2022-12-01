@@ -1,7 +1,7 @@
 from flask import Flask, redirect, url_for
 app = Flask(__name__)
 
-@app.route('/<res>')
+@app.route('/<res>', methods=['GET', 'POST'])
 def api_hello(res):
    return {'msg': 'Hello World'}
 
