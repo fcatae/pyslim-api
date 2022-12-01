@@ -1,0 +1,62 @@
+### Register a guest user
+POST http://localhost:5000/register/user
+Content-type: application/json
+
+{
+  "customerCredential": {
+    "username": "guest",
+    "password": "guest"
+  },
+  "contactInfo": {
+    "email": "guest@email.com"
+  }
+}
+
+### List users
+GET http://localhost:5000/users
+
+### List specific user details
+GET http://localhost:5000/users/guest
+
+### Authenticate Guest
+GET http://localhost:5000/authenticate
+Content-type: application/json
+
+{
+    "username": "guest",
+    "password": "guest"
+}
+
+### Authenticate Test
+GET http://localhost:5000/authenticate
+Content-type: application/json
+
+{
+    "username": "test",
+    "password": "test1"
+}
+
+### Validate the Session Token
+POST http://localhost:5000/Validar
+Content-type: application/json
+
+{
+    "SessionToken": "742c21bf-5dcd-4311-acb1-ff827377540d"
+}
+
+### Log out the request
+GET http://localhost:5000/LogOut
+Content-type: application/json
+
+{
+    "SessionToken": "742c21bf-5dcd-4311-acb1-ff827377540d"
+}
+
+### Validate the Session Token
+POST http://localhost:5000/Validar
+Content-type: application/json
+
+{
+    "SessionToken": "742c21bf-5dcd-4311-acb1-ff827377540d"
+}
+

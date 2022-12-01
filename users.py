@@ -35,7 +35,7 @@ def api_auth():
         'Username': username
     }
 
-@app.route('/Validar')
+@app.route('/Validar', methods=['POST'])
 def api_validate():
     content = request.get_json()
     session = content['SessionToken']
@@ -48,7 +48,9 @@ def api_validate():
 
 @app.route('/LogOut')
 def api_logout():
-    session = ''
+    content = request.get_json()
+    session = content['SessionToken']
+    sessiondb.logout(session)
     return { 
             'result': True,
             'errormsg': 'null',

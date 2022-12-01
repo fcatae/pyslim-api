@@ -4,7 +4,7 @@ class SessionDb:
     db = {}
 
     def login(self):
-        session = uuid.uuid4()
+        session = str(uuid.uuid4())
         self.db[session] = session
             
         return session
@@ -13,4 +13,8 @@ class SessionDb:
         self.db[session_id] = ''
     
     def isLogged(self, session_id):
+        print(session_id)
+        print (session_id in self.db)
+        print ((session_id in self.db) and (self.db[session_id] != ''))
+
         return (session_id in self.db) and (self.db[session_id] != '')
