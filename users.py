@@ -1,8 +1,11 @@
 from flask import Flask, request, redirect
 from userdb import UserDb
+from sessiondb import SessionDb
 
 app = Flask(__name__)
 userdb = UserDb()
+sessiondb = SessionDb()
+
 userdb.add('test', { 'password': 'test1', 'email': 'test@email.com' })
 
 @app.route('/authenticate')
@@ -14,13 +17,15 @@ def api_auth():
     details = userdb.get(username)
     isValid = (details is not None) and details['password'] == password
 
-    if( isValid ):
+    if( isValid ):                 
+        session = sessiondb.login()
+
         return {
             'ID': details['ID'],
             'Authenticated': True,
             'UserId': details['UserId'],
             'Token': details['Token'],
-            'SessionToken': 'abcdefgh',
+            'SessionToken': session,
             'AccountId': details['AccountId'],
             'OMSId': details['OMSId']
         }
@@ -32,8 +37,13 @@ def api_auth():
 
 @app.route('/Validar')
 def api_validate():
+    content = request.get_json()
+    session = content['SessionToken']
+
+    result = sessiondb.isLogged(session)
+
     return {
-            'result': True
+            'result': result
         }
 
 @app.route('/LogOut')
